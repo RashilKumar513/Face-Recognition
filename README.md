@@ -50,8 +50,6 @@ If you prefer a requirements file, create `requirements.txt` with the packages a
    python -m venv venv
    # Windows
    venv\Scripts\activate
-   # macOS / Linux
-   source venv/bin/activate
 
 3. Install dependencies (see Requirements section).
 4. Run the app:
@@ -67,36 +65,3 @@ The Tkinter window opens and shows the live camera feed. Use the buttons on the 
 - Make sure the face is well-lit and facing the camera.
 - Capture from multiple angles and expressions for better recognition robustness.
 - Avoid large variations in background; crop is done using face bounding boxes.
-
-## How to customize
-- Number of samples per person: change `max_samples` variable (default 20).
-- Confidence threshold for recognition: change the value `if confidence < 80:` (lower value = stricter match).
-- Haar cascade: the script uses OpenCV's default frontal face cascade. For better results try alternative cascades or DNN-based detectors.
-- Beep behavior: replace `winsound.Beep(1000, 200)` with a cross-platform solution (for example, playsound or simple sound libraries) or remove it.
-
-## Troubleshooting
-- No camera found: ensure camera is connected and accessible by other apps; try changing `cv2.VideoCapture(0)` index to `1` or another index if multiple cameras are present.
-- ImportError for cv2: install `opencv-python` and `opencv-contrib-python`.
-- Permission errors on camera: on macOS and Windows ensure terminal/app has camera permission.
-- Model fails to load: if `face_recognizer.yml` or `face_names.pkl` are missing or corrupted delete them and re-add persons to retrain.
-
-## Security & privacy
-- The project stores raw face images in `faces_db/`. Treat this directory as sensitive data and do not commit it to public repositories.
-- Consider hashing filenames, encrypting storage, or storing only face embeddings in production systems.
-
-## Limitations
-- This is a simple demo — LBPH is lightweight but less accurate than modern deep-learning-based face models.
-- The alert uses Windows-only `winsound`. Cross-platform sound support is not included out-of-the-box.
-- No authentication, access control, or secure storage is implemented.
-
-## License
-Include a license of your choice (for example MIT). Add a `LICENSE` file to the repository if you want to allow others to re-use the code.
-
-## Contact
-Repository: https://github.com/RashilKumar513/Face-Recognition
-
-If you want, I can also:
-- Add a requirements.txt and a LICENSE file
-- Replace the Windows-only beep with a cross-platform solution
-- Add CLI flags (capture count, camera index, threshold) or a simple settings panel
-
